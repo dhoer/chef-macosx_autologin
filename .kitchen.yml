@@ -1,0 +1,19 @@
+---
+driver:
+  name: vagrant
+  provider: vmware_fusion
+  customize:
+      memory: 2048
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: macosx-10.10
+    driver:
+      box: macosx-10.10
+suites:
+  - name: macosx_autologin_test
+    run_list:
+      - recipe[macosx_autologin_test::enable]
+    attributes:
