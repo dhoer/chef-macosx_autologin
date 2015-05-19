@@ -6,22 +6,24 @@ use_inline_resources
 
 action :enable do
   converge_by('macosx autologin enable') do
-    execute 'set com.apple.loginwindow' do
-      command 'sudo defaults write /Library/Preferences/com.apple.loginwindow '\
-        "\"autoLoginUser\" '#{new_resource.username}'"
+    cookbook_file 'autologin.pl' do
+      path "#{Chef::Config[:file_cache_path]}/autologin.pl"
+      cookbook 'macosx_autologin'
+      mode '0755'
+      action :create
     end
 
-    execute 'create /etc/kcpassword' do
-      command "IO.write('/etc/kcpassword', #{kcpassword_xor(new_resource.password)}"
-      # sensitive true
+    execute 'enable automatic login' do
+      command "sudo #{Chef::Config[:file_cache_path]}/autologin.pl "\
+        "#{new_resource.username} #{new_resource.password} #{new_resource.restart_loginwindow}"
     end
   end
 end
 
 action :disable do
-  converge_by('macosx autologin enable') do
-    execute 'unset com.apple.loginwindow' do
-      command "sudo defaults write /Library/Preferences/com.apple.loginwindow \"autoLoginUser\" ''"
+  converge_by('macosx autologin disable') do
+    execute 'delete autoLoginUser from com.apple.loginwindow' do
+      command "sudo defaults http://oreil.ly/1PlJAhy /Library/Preferences/com.apple.loginwindow \"autoLoginUser\""
     end
 
     execute 'delete /etc/kcpassword' do

@@ -8,15 +8,16 @@
 [travis]: https://travis-ci.org/dhoer/chef-macosx_autologin
 [github]: https://github.com/dhoer/chef-macosx_autologin/issues
 
-Enables/Disables automatic login for user on boot.  
-
+Enables/disables automatic login for user on boot via a modified version of Gavin Brock's 
+[kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.html). 
+                                                  
 ## Requirements
 
 - Chef 11 or higher
 
 ### Platforms
 
-- Mac OS X - 10.4 or higher
+- Mac OS X 10.7 or higher
 
 ## Usage
 
@@ -25,15 +26,16 @@ Requires super-user privileges.
 Enable automatic login
 
 ```ruby
-macosx_autologin '' do
-  password ''
+macosx_autologin 'username' do
+  password 'PassW0Rd'
+  restart_loginwindow true  # true is default
 end
 ```
 
 Disable automatic login
 
 ```ruby
-macosx_autologin '' do
+macosx_autologin 'username' do
   action :disable
 end
 ```
