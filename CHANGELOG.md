@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Update Chef requirements
+
 ## 1.1.0
 
 - Suppress password output on enable action
