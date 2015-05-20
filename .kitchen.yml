@@ -13,7 +13,14 @@ platforms:
     driver:
       box: macosx-10.10
 suites:
-  - name: macosx_autologin_test
+  - name: macosx_autologin_enable
     run_list:
       - recipe[macosx_autologin_test::enable]
+#      - recipe[macosx_autologin_test::disable]
+#      - recipe[macosx_autologin_test::reboot]
+    attributes:
+
+  - name: macosx_autologin_disable
+    run_list:
+      - recipe[macosx_autologin_test::disable]
     attributes:

@@ -17,6 +17,7 @@ action :enable do
     execute 'enable automatic login' do
       command "sudo #{Chef::Config[:file_cache_path]}/autologin.pl "\
         "#{new_resource.username} #{new_resource.password} #{restart_loginwindow}"
+      sensitive true
     end
   end
 end
@@ -25,6 +26,7 @@ action :disable do
   converge_by('macosx autologin disable') do
     execute 'delete autoLoginUser from com.apple.loginwindow' do
       command "sudo defaults delete /Library/Preferences/com.apple.loginwindow \"autoLoginUser\""
+      returns [0, 1]
     end
 
     execute 'delete /etc/kcpassword' do

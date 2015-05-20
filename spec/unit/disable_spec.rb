@@ -10,8 +10,9 @@ describe 'macosx_autologin_test::disable' do
   end
 
   it 'deletes autoLoginUser' do
-    expect(chef_run).to run_execute('delete autoLoginUser from com.apple.loginwindow')
-      .with(command: "sudo defaults delete /Library/Preferences/com.apple.loginwindow \"autoLoginUser\"")
+    expect(chef_run).to run_execute('delete autoLoginUser from com.apple.loginwindow').with(
+      command: "sudo defaults delete /Library/Preferences/com.apple.loginwindow \"autoLoginUser\"",
+      returns: [0, 1])
   end
 
   it 'deletes kcpassword' do

@@ -57,8 +57,9 @@ my $enc  = kcpassword_xor($pass);
 write_pass($enc);
 set_loginwindow($user);
 
+### Make this optional
 if ($restart) {
-	system('killall','loginwindow');
+        system('killall','loginwindow');
 }
 
 exit 0;
