@@ -9,17 +9,16 @@ describe 'macosx_autologin_test::enable' do
     ).converge(described_recipe)
   end
 
-  it 'sets autologin' do
-    expect(chef_run).to run_execute('set com.apple.loginwindow')
-      .with(command: "sudo defaults write /Library/Preferences/com.apple.loginwindow \"autoLoginUser\" 'vagrant'")
+  it 'downloads kcpassword script' do
+    expect(chef_run).to create_cookbook_file('autologin.pl')
   end
 
-  it 'creates kcpassword' do
-    expect(chef_run).to run_execute('create /etc/kcpassword')
+  it 'creates kcpassword and configures com.apple.loginwindow' do
+    expect(chef_run).to run_execute('enable automatic login')
   end
 
   it 'enables autologin' do
     expect(chef_run).to enable_macosx_autologin('vagrant')
-      .with(password: 'vagrant')
+      .with(restart_loginwindow: false, password: 'vagrant')
   end
 end

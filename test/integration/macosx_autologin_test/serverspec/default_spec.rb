@@ -9,5 +9,9 @@ describe 'macosx_autologin_test' do
     describe file('/etc/kcpassword') do
       it { should be_file }
     end
+
+    describe command('sudo defaults read /library/preferences/com.apple.loginwindow') do
+      its(:stdout) { should match(/autoLoginUser = vagrant/) }
+    end
   end
 end

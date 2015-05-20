@@ -43,21 +43,21 @@ sub set_loginwindow {
         my $uid  = getpwnam($user) || die;
         my $file = '/Library/Preferences/com.apple.loginwindow.plist';
 
-        ### Use defaults instead of changing plist - May 2015
+        ### Use defaults instead of changing plist
         system("defaults write $file \"autoLoginUser\" '$user'");
-        system("defaults write $file \"alastUserNamer\" '$user'");
 }
 
 #==============================================================================#
 
 my $user = "$ARGV[0]";
 my $pass = "$ARGV[1]";
+my $restart = "$ARGV[2]";
 my $enc  = kcpassword_xor($pass);
 
 write_pass($enc);
 set_loginwindow($user);
 
-if ($ARGV[2] == "true") {
+if ($restart) {
 	system('killall','loginwindow');
 }
 
