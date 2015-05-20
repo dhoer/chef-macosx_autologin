@@ -8,8 +8,8 @@
 [travis]: https://travis-ci.org/dhoer/chef-macosx_autologin
 [github]: https://github.com/dhoer/chef-macosx_autologin/issues
 
-Enables/disables automatic login for user on boot via a modified version of Gavin Brock's 
-[kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.html). 
+Enables/disables automatic login for user on boot using a modified version of 
+Gavin Brock's [kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.html). 
                                                   
 ## Requirements
 
