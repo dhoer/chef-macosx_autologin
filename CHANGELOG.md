@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- Fix Foodcritic false positive on sensitive resource
+
 ## 1.1.1
 
 - Update Chef requirements

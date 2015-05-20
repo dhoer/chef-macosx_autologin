@@ -6,11 +6,7 @@ RSpec::Core::RakeTask.new do |task|
   task.rspec_opts = '--color -f d'
 end
 RuboCop::RakeTask.new(:rubocop)
-FoodCritic::Rake::LintTask.new do |task|
-  task.options = {
-    tags: %w(~FC009) # https://github.com/acrmp/foodcritic/issues/233
-  }
-end
+FoodCritic::Rake::LintTask.new(:foodcritic)
 
 task default: [:foodcritic, :rubocop, :spec]
 
