@@ -13,7 +13,7 @@ Gavin Brock's [kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.htm
                                                   
 ## Requirements
 
-- Chef 11 or higher
+- Chef 11.14 or higher (`sensitive` resource introduced)
 
 ### Platforms
 
