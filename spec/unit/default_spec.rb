@@ -5,7 +5,7 @@ describe 'macosx_autologin::default' do
     ChefSpec::SoloRunner.new(file_cache_path: '/tmp', platform: 'mac_os_x', version: '10.10') do |node|
       node.set['macosx_autologin']['username'] = 'vagrant'
       node.set['macosx_autologin']['password'] = 'vagrant'
-      node.set['macosx_autologin']['restart_loginwindow'] = false
+      node.set['macosx_autologin']['restart_loginwindow'] = true
     end.converge(described_recipe)
   end
 
@@ -16,7 +16,7 @@ describe 'macosx_autologin::default' do
 
   it 'creates kcpassword and configures com.apple.loginwindow' do
     expect(chef_run).to run_execute('enable automatic login').with(
-      command: 'sudo /tmp/autologin.pl vagrant vagrant 0'
+      command: 'sudo /tmp/autologin.pl vagrant vagrant 1'
     )
   end
 end

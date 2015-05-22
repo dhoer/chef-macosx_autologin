@@ -3,6 +3,7 @@
 ## 2.0.0
 
 - Convert cookbook from LWRPs to Recipes
+- Default restart_loginwindow to false
 
 ## 1.1.2
 

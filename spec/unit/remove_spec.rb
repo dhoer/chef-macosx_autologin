@@ -19,6 +19,6 @@ describe 'macosx_autologin::remove' do
   end
 
   it 'restarts loginwindow' do
-    expect(chef_run).to run_execute('restart loginwindow').with(command: 'sudo killall loginwindow')
+    expect(chef_run).to_not run_execute('restart loginwindow').with(command: 'sudo killall loginwindow')
   end
 end

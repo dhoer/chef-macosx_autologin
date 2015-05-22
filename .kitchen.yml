@@ -17,7 +17,7 @@ suites:
     run_list:
       - recipe[macosx_autologin::default]
 #      - recipe[macosx_autologin::remove]
-      - recipe[macosx_autologin_test::reboot]
+#      - recipe[macosx_autologin_test::reboot]
     attributes:
       macosx_autologin:
         username: 'vagrant'
@@ -26,3 +26,4 @@ suites:
   - name: macosx_autologin_remove
     run_list:
       - recipe[macosx_autologin::remove]
+    attributes:
