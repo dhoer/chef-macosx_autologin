@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe 'macosx_autologin_test::enable' do
+describe 'macosx_autologin::default' do
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(
-      file_cache_path: '/tmp',
-      platform: 'mac_os_x',
-      version: '10.10',
-      step_into: ['macosx_autologin']
-    ).converge(described_recipe)
+    ChefSpec::SoloRunner.new(file_cache_path: '/tmp', platform: 'mac_os_x', version: '10.10') do |node|
+      node.set['macosx_autologin']['username'] = 'vagrant'
+      node.set['macosx_autologin']['password'] = 'vagrant'
+      node.set['macosx_autologin']['restart_loginwindow'] = false
+    end.converge(described_recipe)
   end
 
   it 'downloads kcpassword script' do
@@ -19,10 +18,5 @@ describe 'macosx_autologin_test::enable' do
     expect(chef_run).to run_execute('enable automatic login').with(
       command: 'sudo /tmp/autologin.pl vagrant vagrant 0'
     )
-  end
-
-  it 'enables autologin' do
-    expect(chef_run).to enable_macosx_autologin('vagrant')
-      .with(restart_loginwindow: false, password: 'vagrant')
   end
 end

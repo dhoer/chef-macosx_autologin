@@ -1,11 +1,10 @@
 require 'spec_helper'
 
-describe 'macosx_autologin_test::disable' do
+describe 'macosx_autologin::remove' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(
       platform: 'mac_os_x',
-      version: '10.10',
-      step_into: ['macosx_autologin']
+      version: '10.10'
     ).converge(described_recipe)
   end
 
@@ -19,7 +18,7 @@ describe 'macosx_autologin_test::disable' do
     expect(chef_run).to run_execute('delete /etc/kcpassword').with(command: 'sudo rm -f /etc/kcpassword')
   end
 
-  it 'disables autologin' do
-    expect(chef_run).to disable_macosx_autologin('vagrant')
+  it 'restarts loginwindow' do
+    expect(chef_run).to run_execute('restart loginwindow').with(command: 'sudo killall loginwindow')
   end
 end

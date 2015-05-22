@@ -35,9 +35,7 @@ end
 Disable automatic login
 
 ```ruby
-macosx_autologin 'username' do
-  action :disable
-end
+include_recipe[macosx_autologin::remove]
 ```
 
 ## Getting Help

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+- Convert cookbook from LWRPs to Recipes
+
 ## 1.1.2
 
 - Fix Foodcritic false positive on sensitive resource

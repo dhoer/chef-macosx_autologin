@@ -13,14 +13,16 @@ platforms:
     driver:
       box: macosx-10.10
 suites:
-  - name: macosx_autologin_enable
+  - name: macosx_autologin_default
     run_list:
-      - recipe[macosx_autologin_test::enable]
-#      - recipe[macosx_autologin_test::disable]
-#      - recipe[macosx_autologin_test::reboot]
+      - recipe[macosx_autologin::default]
+#      - recipe[macosx_autologin::remove]
+      - recipe[macosx_autologin_test::reboot]
     attributes:
+      macosx_autologin:
+        username: 'vagrant'
+        password: 'vagrant'
 
-  - name: macosx_autologin_disable
+  - name: macosx_autologin_remove
     run_list:
-      - recipe[macosx_autologin_test::disable]
-    attributes:
+      - recipe[macosx_autologin::remove]
