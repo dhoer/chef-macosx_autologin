@@ -23,18 +23,21 @@ Gavin Brock's [kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.htm
 
 Requires super-user privileges. 
 
-Enable automatic login
+Enable automatic login for user
 
 ```ruby
-macosx_autologin 'username' do
-  password 'PassW0Rd'
-  restart_loginwindow true  # true is default
-end
+node.set['macosx_autologin']['username'] = 'username'
+node.set['macosx_autologin']['password'] = 'password'
+node.set['macosx_autologin']['restart_loginwindow'] = true # default is false
+
+include_recipe[macosx_autologin]
 ```
 
 Disable automatic login
 
 ```ruby
+node.set['macosx_autologin']['restart_loginwindow'] = true # default is false
+
 include_recipe[macosx_autologin::remove]
 ```
 
