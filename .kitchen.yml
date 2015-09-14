@@ -11,13 +11,11 @@ provisioner:
 platforms:
   - name: macosx-10.10
     driver:
-      box: macosx-10.10
+      box: dhoer/macosx-10.10
 suites:
   - name: macosx_autologin_default
     run_list:
       - recipe[macosx_autologin::default]
-#      - recipe[macosx_autologin::remove]
-#      - recipe[macosx_autologin_test::reboot]
     attributes:
       macosx_autologin:
         username: 'vagrant'
@@ -25,5 +23,7 @@ suites:
 
   - name: macosx_autologin_remove
     run_list:
-      - recipe[macosx_autologin::remove]
+      - recipe[macosx_autologin::default]
     attributes:
+      macosx_autologin:
+        enable: false

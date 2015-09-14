@@ -23,27 +23,37 @@ Gavin Brock's [kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.htm
 
 Requires super-user privileges. 
 
-Enable automatic login for user
+### Attributes
+
+- `node['macosx_autologin']['enable']` - Enable autologin. Default `true`.
+- `node['macosx_autologin']['username']` - Username to login as. Required when enabled. 
+- `node['macosx_autologin']['password']` - Password of username. Required when enabled.
+- `node['macosx_autologin']['restart_loginwindow']` Display login screen. Default `false`.
+
+### Examples 
+
+Enable automatic login for user and display login screen
 
 ```ruby
 node.set['macosx_autologin']['username'] = 'username'
 node.set['macosx_autologin']['password'] = 'password'
-node.set['macosx_autologin']['restart_loginwindow'] = true # default is false
+node.set['macosx_autologin']['restart_loginwindow'] = true 
 
-include_recipe[macosx_autologin]
+include_recipe 'macosx_autologin'
 ```
 
-Disable automatic login
+Disable automatic login and display login screen
 
 ```ruby
-node.set['macosx_autologin']['restart_loginwindow'] = true # default is false
+node.set['macosx_autologin']['enable'] = false
+node.set['macosx_autologin']['restart_loginwindow'] = true 
 
-include_recipe[macosx_autologin::remove]
+include_recipe 'macosx_autologin'
 ```
 
 ## Getting Help
 
-- Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/chef-macosx_autologin).
+- Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/macosx_autologin).
 - Report bugs and discuss potential features in
 [Github issues](https://github.com/dhoer/chef-macosx_autologin/issues).
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0
+
+- Merge remove recipe into default recipe
+
 ## 2.0.0
 
 - Convert cookbook from LWRPs to Recipes
