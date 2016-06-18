@@ -11,7 +11,7 @@ describe 'macosx_autologin_test' do
     end
 
     describe command('sudo defaults read /library/preferences/com.apple.loginwindow') do
-      its(:stdout) { should match(/autoLoginUser = #{ENV['TRAVIS']}/) }
+      its(:stdout) { should match(/autoLoginUser = #{ENV['TRAVIS'] ? 'travis' : 'vagrant'}/) }
     end
   end
 end
