@@ -10,8 +10,10 @@ describe 'macosx_autologin_test' do
       it { should_not be_file }
     end
 
+    user = ENV['TRAVIS'] == true ? 'travis' : 'vagrant'
+
     describe command('sudo defaults read /library/preferences/com.apple.loginwindow') do
-      its(:stdout) { should_not match(/autoLoginUser = vagrant/) }
+      its(:stdout) { should_not match(/autoLoginUser = #{user}/) }
     end
   end
 end
