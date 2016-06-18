@@ -1,0 +1,19 @@
+# Usage: KITCHEN_YAML=.kitchen.localhost.yml bundle exec kitchen list
+---
+driver:
+  name: localhost
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: macosx-10
+
+suites:
+  - name: default
+    run_list:
+      - macosx_autologin
+    attributes:
+      macosx_autologin:
+        username: 'travis'
+        password: 'travis'

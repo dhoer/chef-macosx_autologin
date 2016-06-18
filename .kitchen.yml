@@ -13,17 +13,17 @@ platforms:
     driver:
       box: dhoer/macosx-10.10
 suites:
-  - name: macosx_autologin_default
+  - name: default
     run_list:
-      - recipe[macosx_autologin::default]
+      - macosx_autologin
     attributes:
       macosx_autologin:
         username: 'vagrant'
         password: 'vagrant'
 
-  - name: macosx_autologin_remove
+  - name: remove
     run_list:
-      - recipe[macosx_autologin::default]
+      - macosx_autologin
     attributes:
       macosx_autologin:
         enable: false

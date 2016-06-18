@@ -12,7 +12,8 @@ describe 'macosx_autologin::default' do
 
     it 'downloads kcpassword script' do
       expect(chef_run).to create_cookbook_file('autologin.pl').with(
-        path: '/tmp/autologin.pl', cookbook: 'macosx_autologin', mode: '0755')
+        path: '/tmp/autologin.pl', cookbook: 'macosx_autologin', mode: '0755'
+      )
     end
 
     it 'creates kcpassword and configures com.apple.loginwindow' do
@@ -31,8 +32,9 @@ describe 'macosx_autologin::default' do
 
     it 'deletes autoLoginUser' do
       expect(chef_run).to run_execute('delete autoLoginUser from com.apple.loginwindow').with(
-        command: "sudo defaults delete /Library/Preferences/com.apple.loginwindow \"autoLoginUser\"",
-        returns: [0, 1])
+        command: 'sudo defaults delete /Library/Preferences/com.apple.loginwindow "autoLoginUser"',
+        returns: [0, 1]
+      )
     end
 
     it 'deletes kcpassword' do

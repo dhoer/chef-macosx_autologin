@@ -15,7 +15,7 @@ if node['macosx_autologin']['enable']
   end
 else
   execute 'delete autoLoginUser from com.apple.loginwindow' do
-    command "sudo defaults delete /Library/Preferences/com.apple.loginwindow \"autoLoginUser\""
+    command 'sudo defaults delete /Library/Preferences/com.apple.loginwindow "autoLoginUser"'
     returns [0, 1]
   end
 
