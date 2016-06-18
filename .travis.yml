@@ -27,5 +27,6 @@ install:
   - chef exec bundle update
 
 script:
+  - env
   - chef exec bundle exec rake
   - KITCHEN_YAML=.kitchen.localhost.yml chef exec bundle exec kitchen test
