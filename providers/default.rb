@@ -1,4 +1,10 @@
-if node['macosx_autologin']['enable']
+use_inline_resources
+
+def whyrun_supported?
+  true
+end
+
+action :enable do
   cookbook_file 'autologin.pl' do
     path "#{Chef::Config[:file_cache_path]}/autologin.pl"
     cookbook 'macosx_autologin'
@@ -6,14 +12,16 @@ if node['macosx_autologin']['enable']
     action :create
   end
 
-  restart_loginwindow = node['macosx_autologin']['restart_loginwindow'] ? 1 : 0
+  restart_loginwindow = new_resource.restart_loginwindow ? 1 : 0
 
   execute 'enable automatic login' do # ~FC009
     command "sudo #{Chef::Config[:file_cache_path]}/autologin.pl "\
-      "#{node['macosx_autologin']['username']} #{node['macosx_autologin']['password']} #{restart_loginwindow}"
-    sensitive true
+      "#{new_resource.username} #{new_resource.password} #{restart_loginwindow}"
+    sensitive new_resource.sensitive
   end
-else
+end
+
+action :disable do
   execute 'delete autoLoginUser from com.apple.loginwindow' do
     command 'sudo defaults delete /Library/Preferences/com.apple.loginwindow "autoLoginUser"'
     returns [0, 1]
@@ -23,8 +31,8 @@ else
     command 'sudo rm -f /etc/kcpassword'
   end
 
-  execute 'restart loginwindow' do
+  execute 'restart loginwindow' do # ~FC021
     command 'sudo killall loginwindow'
-    only_if { node['macosx_autologin']['restart_loginwindow'] }
+    only_if { new_resource.restart_loginwindow }
   end
 end

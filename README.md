@@ -11,43 +11,64 @@ Gavin Brock's [kcpassword](http://www.brock-family.org/gavin/perl/kcpassword.htm
                                                   
 ## Requirements
 
-- Chef 11.14 (introduced `sensitive` resource) or higher
+- Chef 11.14+ 
 
 ### Platforms
 
-- Mac OS X 10.7 or higher
+- Mac OS X 10.7+
 
 ## Usage
 
 Requires super-user privileges. 
 
-### Attributes
-
-- `node['macosx_autologin']['enable']` - Enable autologin. Default `true`.
-- `node['macosx_autologin']['username']` - Username to login as. Required when enabled. 
-- `node['macosx_autologin']['password']` - Password of username. Required when enabled.
-- `node['macosx_autologin']['restart_loginwindow']` Display login screen. Default `false`.
-
-### Examples 
-
 Enable automatic login for user and display login screen
 
 ```ruby
-node.set['macosx_autologin']['username'] = 'username'
-node.set['macosx_autologin']['password'] = 'password'
-node.set['macosx_autologin']['restart_loginwindow'] = true 
-
-include_recipe 'macosx_autologin'
+macosx_autologin 'username' do
+  password 'password
+  restart_loginwindow true
+  action :enable
+end
 ```
 
 Disable automatic login and display login screen
 
 ```ruby
-node.set['macosx_autologin']['enable'] = false
-node.set['macosx_autologin']['restart_loginwindow'] = true 
-
-include_recipe 'macosx_autologin'
+macosx_autologin 'username' do
+  restart_loginwindow true
+  action :disable
+end
 ```
+
+### Actions
+
+- `enable` - Enables autologin.
+- `disable` - Disables autologin.
+
+### Attributes
+
+- `username` - Username to login as. Required when enabled. Defaults 
+to resource block name. 
+- `password` - Password of username. Required when enabled.
+- `restart_loginwindow` - Display login screen. Default `false`.
+
+## ChefSpec Matchers
+
+This cookbook includes custom [ChefSpec](https://github.com/sethvargo/chefspec) matchers you can use to test 
+your own cookbooks.
+
+Example Matcher Usage
+
+```ruby
+expect(chef_run).to enable_macosx_autologin('username').with(
+  password: 'password'
+)
+```
+      
+Selenium Cookbook Matchers
+
+- enable_macosx_autologin(resource_name)
+- disable_macosx_autologin(resource_name)
 
 ## Getting Help
 

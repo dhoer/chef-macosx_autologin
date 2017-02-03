@@ -23,7 +23,5 @@ suites:
 
   - name: remove
     run_list:
-      - macosx_autologin
+      - macosx_autologin_test::disable
     attributes:
-      macosx_autologin:
-        enable: false
