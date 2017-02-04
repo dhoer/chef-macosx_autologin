@@ -52,7 +52,7 @@ to resource block name.
 - `password` - Password of username. Required when enabled.
 - `restart_loginwindow` - Display login screen. Default `false`.
 
-## ChefSpec Matchers
+`## ChefSpec Matchers
 
 This cookbook includes custom [ChefSpec](https://github.com/sethvargo/chefspec) matchers you can use to test 
 your own cookbooks.

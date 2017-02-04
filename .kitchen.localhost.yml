@@ -17,3 +17,4 @@ suites:
       macosx_autologin_test:
         username: 'travis'
         password: 'travis'
+        restart_loginwindow: false
