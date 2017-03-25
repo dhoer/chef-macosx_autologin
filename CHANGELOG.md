@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.0 2017-03-24
+
+- Rename sensitive attribute to confidential to be Chef 13 compatible
+
 ## 4.0.0 2017-02-03
 
 - Replace recipe with resource to allow for suppressing sensitive info

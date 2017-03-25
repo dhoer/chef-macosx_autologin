@@ -17,7 +17,7 @@ action :enable do
   execute 'enable automatic login' do # ~FC009
     command "sudo #{Chef::Config[:file_cache_path]}/autologin.pl "\
       "#{new_resource.username} #{new_resource.password} #{restart_loginwindow}"
-    sensitive new_resource.sensitive
+    sensitive new_resource.confidential
   end
 end
 
